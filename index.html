@@ -14,16 +14,26 @@
 </head>
 
 <body>
-    <header>
-        <div class="input-group container w-25 my-5 mx-auto">
+    <header class="container">
+        <h2 class="text-center mt-3">Best Phone to Buy for 2022</h2>
+        <div class="input-group  w-25 mt-5 mx-auto">
             <input id="search-field" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                 aria-describedby="search-addon" />
             <button id="search-button" onclick="searchPhone()" type="button"
                 class="btn btn-outline-primary">search</button>
         </div>
-        <div id="explore-result">
-
+        <!-- spinner -->
+        <div id="spinner">
+            <h3>Loading...</h3>
         </div>
+        <div class="error mx-auto mt-3">
+            <p id="empty-error" class=" empty-error text-center "> please search your favorite phone</p>
+        </div>
+        <div id="explore-result" class="mt-5">
+        </div>
+        <div id="sensor" class="card-body mx-auto"></div>
+
+
     </header>
     <section class="container">
         <div id="phone-container" class="row mx-auto row-cols-1 row-cols-md-3 g-4">

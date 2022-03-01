@@ -1,63 +1,113 @@
+// toggle spinner 
+const toggleSpiner = displaystyle => {
+    const spinner = document.getElementById('spinner');
+    spinner.style.display = displaystyle;
+}
+const toggleSearchResult = displaystyle => {
+    const spinner = document.getElementById('explore-result');
+    spinner.style.display = displaystyle;
+}
+// search button 
 const searchPhone = () => {
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     searchField.value = '';
-    // console.log(searchText)
 
-    const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-    // console.log(url)
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displayData(data.data))
+    if (searchText == '') {
+        const error = document.getElementById('empty-error')
+        const phoneContainer = document.getElementById('phone-container');
+        phoneContainer.textContent = '';
+        error.style.display = 'block'
+
+    }
+    // console.log(searchText)
+    else {
+        const error = document.getElementById('empty-error')
+        error.style.display = 'none';
+        toggleSpiner('block');
+        toggleSearchResult('none')
+
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        // console.log(url)
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displayData(data.data.slice(0, 20)))
+    }
 }
-searchPhone()
+
+
+// display all data 
 const displayData = phones => {
-    // console.log(phone)
+    // console.log(phones)
     const phoneContainer = document.getElementById('phone-container');
+    phoneContainer.textContent = '';
     phones.forEach(phone => {
         // console.log(phone)
         const div = document.createElement('div');
         div.classList.add('col');
+
+
         div.innerHTML = `  
-        <div class="card h-100">
+        <div class="card border-light shadow h-100"> 
            <img src="${phone.image}" class="card-img-top w-50 mt-2 mx-auto" alt="...">
-            <div class="card-body">
+            <div class="card-body text-center">
                <h5 class="card-title">${phone.brand}</h5>
                <p>${phone.phone_name}</p>
             </div>
-            <button id="explore-button" onclick="exploreMore('${phone.slug}')" class="w-50 mx-auto">Explore more</button>
+            <button id="explore-button" onclick="exploreMore('${phone.slug}')" class="w-50 mx-auto btn-primary btn mb-2">Explore more</button>
         </div> `;
         phoneContainer.appendChild(div)
+        toggleSpiner('none');
+        toggleSearchResult('block')
     });
 }
+// display details for single phone 
 
 const exploreMore = phoneDetail => {
     const url = ` https://openapi.programming-hero.com/api/phone/${phoneDetail}`;
     console.log(url)
+
     fetch(url)
         .then(res => res.json())
-        .then(data => displayExploreButton(`${data.data}
-         `))
+        .then(data => displayExploreButton(data.data))
 }
 const displayExploreButton = explore => {
-    // console.log(explore)
+    console.log(explore)
     const exploreResult = document.getElementById('explore-result')
+
     const div = document.createElement('div');
     div.classList.add('explore')
+
     div.innerHTML = `
-     <div class="card text-center">
-        <div class="card-header">
+     <div class="card border-light">
+        <div class="card-header w-25 text-center mx-auto rounded">
           Featured
         </div>
-         <div class="card-body">
-           <h5 class="card-title">${explore.others.gps}</h5>
-           <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+         <div class="card-body mx-auto">
+         <img src="${explore.image}" class="card-img-top img-fluid w-50 my-4 mx-auto" alt="...">
+           <h5 class="card-title">${explore.name}</h5>
+           <p class="card-text">storage: ${explore.mainFeatures.storage}</p>
+           <p class="card-text">chipSet: ${explore.mainFeatures.chipSet}</p>
+           <p class="card-text">displaySize: ${explore.mainFeatures.displaySize}</p>
+           <p class="card-text">memory: ${explore.mainFeatures.memory}</p>
+           <p class="card-text">GPS: ${explore?.others?.GPS ? explore.others.GPS : 'currently is not available'}</p>
+           <p class="card-text">Bluetooth: ${explore?.others?.Bluetooth ? explore.others.Bluetooth : 'currently is not available'}</p>
+           <p class="card-text">NFC: ${explore?.others?.NFC ? explore.others.NFC : 'currently is not available'}</p>
+           <p class="card-text">USB: ${explore?.others?.USB ? explore.others.USB : 'currently is not available'}</p> 
+           <p class="card-text">${explore?.releaseDate ? explore.releaseDate : 'Reasles date is not found'}</p>
+           <p class="card-text">${explore.mainFeatures.sensors}</p>
+        
+          <a href="#" class="btn text-center mx-auto btn-primary">Buy Now</a>
          </div>
     </div> `;
     exploreResult.appendChild(div)
-}
 
+}
+// <p class="card-text">GPS: ${explore.others.GPS}</p>
+// <p class="card-text">Bluetooth: ${explore.others.Bluetooth}</p>
+
+{/* <p class="card-text">NFC: ${explore.others.NFC}</p>
+<p class="card-text">USB: ${explore.others.USB}</p> */}
 
 // ${data.data.mainFeatures.chipSet}
 // ${data.data.mainFeatures.displaySize}
