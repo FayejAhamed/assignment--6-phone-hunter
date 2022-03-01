@@ -45,13 +45,13 @@ const displayData = phones => {
         phoneContainer.textContent = '';
         document.getElementById('no-result').style.display = 'block'
         toggleSpiner('none')
-        clearExpolreContent()
+        clearExpolreContent();
     }
     else {
         document.getElementById('no-result').style.display = 'none'
         const phoneContainer = document.getElementById('phone-container');
         phoneContainer.textContent = '';
-        clearExpolreContent()
+        clearExpolreContent();
 
         phones.forEach(phone => {
             // console.log(phone)
@@ -127,13 +127,3 @@ const displayExploreButton = explore => {
     exploreResult.appendChild(div)
 
 }
-// <p class="card-text">GPS: ${explore.others.GPS}</p>
-// <p class="card-text">Bluetooth: ${explore.others.Bluetooth}</p>
-
-{/* <p class="card-text">NFC: ${explore.others.NFC}</p>
-<p class="card-text">USB: ${explore.others.USB}</p> */}
-
-// ${data.data.mainFeatures.chipSet}
-// ${data.data.mainFeatures.displaySize}
-// ${data.data.mainFeatures.displaySize}
-// ${data.data.mainFeatures.memory} 
