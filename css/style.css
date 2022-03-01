@@ -1,12 +1,13 @@
 
-.error{
-
-    
+.error{    
     width: 300px;
     height: auto;
     border-radius: 5px;
     background-color: rgba(190, 186, 185, 0.158);
-
+}
+#no-result{
+    display: none;
+   
 }
 .empty-error{
     

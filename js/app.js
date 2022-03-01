@@ -18,6 +18,7 @@ const searchPhone = () => {
         const phoneContainer = document.getElementById('phone-container');
         phoneContainer.textContent = '';
         error.style.display = 'block'
+        clearExpolreContent()
 
     }
     // console.log(searchText)
@@ -39,15 +40,26 @@ const searchPhone = () => {
 // display all data 
 const displayData = phones => {
     // console.log(phones)
-    const phoneContainer = document.getElementById('phone-container');
-    phoneContainer.textContent = '';
-    phones.forEach(phone => {
-        // console.log(phone)
-        const div = document.createElement('div');
-        div.classList.add('col');
+    if (phones.length == 0) {
+        const phoneContainer = document.getElementById('phone-container');
+        phoneContainer.textContent = '';
+        document.getElementById('no-result').style.display = 'block'
+        toggleSpiner('none')
+        clearExpolreContent()
+    }
+    else {
+        document.getElementById('no-result').style.display = 'none'
+        const phoneContainer = document.getElementById('phone-container');
+        phoneContainer.textContent = '';
+        clearExpolreContent()
+
+        phones.forEach(phone => {
+            // console.log(phone)
+            const div = document.createElement('div');
+            div.classList.add('col');
 
 
-        div.innerHTML = `  
+            div.innerHTML = `  
         <div class="card border-light shadow h-100"> 
            <img src="${phone.image}" class="card-img-top w-50 mt-2 mx-auto" alt="...">
             <div class="card-body text-center">
@@ -56,24 +68,32 @@ const displayData = phones => {
             </div>
             <button id="explore-button" onclick="exploreMore('${phone.slug}')" class="w-50 mx-auto btn-primary btn mb-2">Explore more</button>
         </div> `;
-        phoneContainer.appendChild(div)
-        toggleSpiner('none');
-        toggleSearchResult('block')
-    });
+            phoneContainer.appendChild(div)
+            toggleSpiner('none');
+            toggleSearchResult('block')
+        });
+    }
 }
 // display details for single phone 
 
 const exploreMore = phoneDetail => {
     const url = ` https://openapi.programming-hero.com/api/phone/${phoneDetail}`;
-    console.log(url)
+    // console.log(url)
 
     fetch(url)
         .then(res => res.json())
         .then(data => displayExploreButton(data.data))
 }
-const displayExploreButton = explore => {
-    console.log(explore)
+const clearExpolreContent = () => {
     const exploreResult = document.getElementById('explore-result')
+    exploreResult.textContent = '';
+
+}
+const displayExploreButton = explore => {
+    // console.log(explore)
+
+    const exploreResult = document.getElementById('explore-result')
+    exploreResult.textContent = '';
 
     const div = document.createElement('div');
     div.classList.add('explore')
