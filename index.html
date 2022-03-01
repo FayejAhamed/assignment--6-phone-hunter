@@ -14,14 +14,22 @@
 </head>
 
 <body>
+
+
+
+
     <header class="container">
-        <h2 class="text-center mt-3">Best Phone to Buy for 2022</h2>
-        <div class="input-group  w-25 mt-5 mx-auto">
-            <input id="search-field" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                aria-describedby="search-addon" />
-            <button id="search-button" onclick="searchPhone()" type="button"
-                class="btn btn-outline-primary">search</button>
+        <h2 class="text-center my-5"><strong>Best Phone to Buy for 2022</strong></h2>
+
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-8 col-sm-12">
+                <div class="search"> <i class="fa fa-search"></i> <input id="search-field" type="text"
+                        class="form-control" placeholder="Looking for Phone? Search Now"> <button id="search-button"
+                        onclick="searchPhone()" class="btn btn-primary">Search</button>
+                </div>
+            </div>
         </div>
+
         <!-- spinner -->
         <div id="spinner">
             <h3>Loading...</h3>

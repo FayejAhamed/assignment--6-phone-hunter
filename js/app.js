@@ -66,7 +66,8 @@ const displayData = phones => {
                <h5 class="card-title">${phone.brand}</h5>
                <p>${phone.phone_name}</p>
             </div>
-            <button id="explore-button" onclick="exploreMore('${phone.slug}')" class="w-50 mx-auto btn-primary btn mb-2">Explore more</button>
+        
+            <a href="#" class="text-center"><button id="explore-button" onclick="exploreMore('${phone.slug}')" class="w-50 mx-auto btn-primary btn mb-2">Explore more</button><a/>
         </div> `;
             phoneContainer.appendChild(div)
             toggleSpiner('none');
@@ -105,16 +106,19 @@ const displayExploreButton = explore => {
         </div>
          <div class="card-body mx-auto">
          <img src="${explore.image}" class="card-img-top img-fluid w-50 my-4 mx-auto" alt="...">
-           <h5 class="card-title">${explore.name}</h5>
+           <h4 class="card-title">${explore.name}</h4>
+           <br> <h5>Main Features:</h5>
            <p class="card-text">storage: ${explore.mainFeatures.storage}</p>
            <p class="card-text">chipSet: ${explore.mainFeatures.chipSet}</p>
            <p class="card-text">displaySize: ${explore.mainFeatures.displaySize}</p>
            <p class="card-text">memory: ${explore.mainFeatures.memory}</p>
            <p class="card-text">GPS: ${explore?.others?.GPS ? explore.others.GPS : 'currently is not available'}</p>
+           <h5>Others:</h5>
            <p class="card-text">Bluetooth: ${explore?.others?.Bluetooth ? explore.others.Bluetooth : 'currently is not available'}</p>
            <p class="card-text">NFC: ${explore?.others?.NFC ? explore.others.NFC : 'currently is not available'}</p>
            <p class="card-text">USB: ${explore?.others?.USB ? explore.others.USB : 'currently is not available'}</p> 
            <p class="card-text">${explore?.releaseDate ? explore.releaseDate : 'Reasles date is not found'}</p>
+           <h5>Sensor:</h5>
            <p class="card-text">${explore.mainFeatures.sensors}</p>
         
           <a href="#" class="btn text-center mx-auto btn-primary">Buy Now</a>
