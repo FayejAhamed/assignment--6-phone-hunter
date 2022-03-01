@@ -98,7 +98,7 @@ const displayExploreButton = explore => {
 
     const div = document.createElement('div');
     div.classList.add('explore')
-
+    // showing data after clicking button on the phone 
     div.innerHTML = `
      <div class="card border-light">
         <div class="card-header w-25 text-center mx-auto rounded">
@@ -125,5 +125,4 @@ const displayExploreButton = explore => {
          </div>
     </div> `;
     exploreResult.appendChild(div)
-
 }
